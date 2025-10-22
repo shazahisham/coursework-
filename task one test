@@ -1,0 +1,188 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <fstream>
+#include <iomanip>
+using namespace std;
+
+// Bubble Sort with comparison count
+int bubble_sort_count(int arr[], int n) {
+    int comparisons = 0;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            comparisons++;
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    return comparisons;
+}
+
+// Selection Sort with comparison count
+int selection_sort_count(int arr[], int n) {
+    int comparisons = 0;
+    for (int i = 0; i < n - 1; i++) {
+        int min_idx = i;
+        for (int j = i + 1; j < n; j++) {
+            comparisons++;
+            if (arr[j] < arr[min_idx]) {
+                min_idx = j;
+            }
+        }
+        int temp = arr[i];
+        arr[i] = arr[min_idx];
+        arr[min_idx] = temp;
+    }
+    return comparisons;
+}
+
+// Insertion Sort with comparison count
+int insertion_sort_count(int arr[], int n) {
+    int comparisons = 0;
+    for (int i = 1; i < n; i++) {
+        int key = arr[i];
+        int j = i - 1;
+        
+        while (j >= 0) {
+            comparisons++;
+            if (arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j--;
+            } else {
+                break;
+            }
+        }
+        arr[j + 1] = key;
+    }
+    return comparisons;
+}
+
+// Generate arrays
+void generate_random_array(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        arr[i] = rand() % 1000;
+    }
+}
+
+void generate_sorted_array(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        arr[i] = i + 1;
+    }
+}
+
+void generate_reverse_sorted_array(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        arr[i] = n - i;
+    }
+}
+
+void copy_array(int source[], int dest[], int n) {
+    for (int i = 0; i < n; i++) {
+        dest[i] = source[i];
+    }
+}
+
+// Write results to CSV file
+void write_to_csv(const string& filename, const string& headers, const string& data) {
+    ofstream file(filename, ios::app);
+    if (file.is_open()) {
+        file << data << endl;
+        file.close();
+    }
+}
+
+// Test comparisons function
+void test_comparisons() {
+    // Create CSV files
+    ofstream comp_file("comparisons.csv");
+    ofstream time_file("execution_time.csv");
+    
+    // Write headers
+    comp_file << "Array Size,Array Type,Bubble Sort,Selection Sort,Insertion Sort" << endl;
+    time_file << "Array Size,Array Type,Bubble Sort,Selection Sort,Insertion Sort" << endl;
+    
+    cout << "=== SORTING ALGORITHM COMPARISON ANALYSIS ===" << endl;
+    
+    // Test for different array types
+    string array_types[] = {"Random", "Sorted", "Reverse Sorted"};
+    void (*generators[])(int[], int) = {generate_random_array, generate_sorted_array, generate_reverse_sorted_array};
+    
+    for (int type = 0; type < 3; type++) {
+        cout << "\n=== " << array_types[type] << " ARRAYS ===" << endl;
+        cout << "Array Size | Bubble Sort | Selection Sort | Insertion Sort" << endl;
+        cout << "-----------|-------------|----------------|---------------" << endl;
+        
+        for (int n = 1; n <= 30; n++) {
+            int bubble_total = 0;
+            int selection_total = 0;
+            int insertion_total = 0;
+            double bubble_time = 0;
+            double selection_time = 0;
+            double insertion_time = 0;
+            
+            // Test with 30 arrays of current size
+            for (int test = 0; test < 30; test++) {
+                int original_arr[n];
+                int temp_arr[n];
+                
+                // Generate array
+                generators[type](original_arr, n);
+                
+                // Test Bubble Sort with timing
+                copy_array(original_arr, temp_arr, n);
+                clock_t start = clock();
+                bubble_total += bubble_sort_count(temp_arr, n);
+                clock_t end = clock();
+                bubble_time += double(end - start) / CLOCKS_PER_SEC;
+                
+                // Test Selection Sort with timing
+                copy_array(original_arr, temp_arr, n);
+                start = clock();
+                selection_total += selection_sort_count(temp_arr, n);
+                end = clock();
+                selection_time += double(end - start) / CLOCKS_PER_SEC;
+                
+                // Test Insertion Sort with timing
+                copy_array(original_arr, temp_arr, n);
+                start = clock();
+                insertion_total += insertion_sort_count(temp_arr, n);
+                end = clock();
+                insertion_time += double(end - start) / CLOCKS_PER_SEC;
+            }
+            
+            // Calculate averages
+            int avg_bubble = bubble_total / 30;
+            int avg_selection = selection_total / 30;
+            int avg_insertion = insertion_total / 30;
+            double avg_bubble_time = bubble_time / 30;
+            double avg_selection_time = selection_time / 30;
+            double avg_insertion_time = insertion_time / 30;
+            
+            // Print to console
+            cout << setw(10) << n << " | " 
+                 << setw(11) << avg_bubble << " | " 
+                 << setw(14) << avg_selection << " | " 
+                 << setw(15) << avg_insertion << endl;
+            
+            // Write to CSV files
+            comp_file << n << "," << array_types[type] << "," 
+                     << avg_bubble << "," << avg_selection << "," << avg_insertion << endl;
+            time_file << n << "," << array_types[type] << "," 
+                     << avg_bubble_time << "," << avg_selection_time << "," << avg_insertion_time << endl;
+        }
+    }
+    
+    comp_file.close();
+    time_file.close();
+    cout << "\nResults saved to 'comparisons.csv' and 'execution_time.csv'" << endl;
+    cout << "You can open these files in Excel to create charts." << endl;
+}
+
+int main() {
+    srand(time(0));
+    test_comparisons();
+    return 0;
+}
