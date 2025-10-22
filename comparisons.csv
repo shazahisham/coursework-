@@ -1,0 +1,91 @@
+Array Size,Array Type,Bubble Sort,Selection Sort,Insertion Sort
+1,Random,0,0,0
+2,Random,1,1,1
+3,Random,3,3,2
+4,Random,6,6,5
+5,Random,10,10,7
+6,Random,15,15,11
+7,Random,21,21,14
+8,Random,28,28,19
+9,Random,36,36,22
+10,Random,45,45,30
+11,Random,55,55,34
+12,Random,66,66,40
+13,Random,78,78,50
+14,Random,91,91,57
+15,Random,105,105,61
+16,Random,120,120,69
+17,Random,136,136,79
+18,Random,153,153,93
+19,Random,171,171,101
+20,Random,190,190,113
+21,Random,210,210,120
+22,Random,231,231,133
+23,Random,253,253,143
+24,Random,276,276,157
+25,Random,300,300,174
+26,Random,325,325,184
+27,Random,351,351,190
+28,Random,378,378,216
+29,Random,406,406,225
+30,Random,435,435,255
+1,Sorted,0,0,0
+2,Sorted,1,1,1
+3,Sorted,3,3,2
+4,Sorted,6,6,3
+5,Sorted,10,10,4
+6,Sorted,15,15,5
+7,Sorted,21,21,6
+8,Sorted,28,28,7
+9,Sorted,36,36,8
+10,Sorted,45,45,9
+11,Sorted,55,55,10
+12,Sorted,66,66,11
+13,Sorted,78,78,12
+14,Sorted,91,91,13
+15,Sorted,105,105,14
+16,Sorted,120,120,15
+17,Sorted,136,136,16
+18,Sorted,153,153,17
+19,Sorted,171,171,18
+20,Sorted,190,190,19
+21,Sorted,210,210,20
+22,Sorted,231,231,21
+23,Sorted,253,253,22
+24,Sorted,276,276,23
+25,Sorted,300,300,24
+26,Sorted,325,325,25
+27,Sorted,351,351,26
+28,Sorted,378,378,27
+29,Sorted,406,406,28
+30,Sorted,435,435,29
+1,Reverse Sorted,0,0,0
+2,Reverse Sorted,1,1,1
+3,Reverse Sorted,3,3,3
+4,Reverse Sorted,6,6,6
+5,Reverse Sorted,10,10,10
+6,Reverse Sorted,15,15,15
+7,Reverse Sorted,21,21,21
+8,Reverse Sorted,28,28,28
+9,Reverse Sorted,36,36,36
+10,Reverse Sorted,45,45,45
+11,Reverse Sorted,55,55,55
+12,Reverse Sorted,66,66,66
+13,Reverse Sorted,78,78,78
+14,Reverse Sorted,91,91,91
+15,Reverse Sorted,105,105,105
+16,Reverse Sorted,120,120,120
+17,Reverse Sorted,136,136,136
+18,Reverse Sorted,153,153,153
+19,Reverse Sorted,171,171,171
+20,Reverse Sorted,190,190,190
+21,Reverse Sorted,210,210,210
+22,Reverse Sorted,231,231,231
+23,Reverse Sorted,253,253,253
+24,Reverse Sorted,276,276,276
+25,Reverse Sorted,300,300,300
+26,Reverse Sorted,325,325,325
+27,Reverse Sorted,351,351,351
+28,Reverse Sorted,378,378,378
+29,Reverse Sorted,406,406,406
+30,Reverse Sorted,435,435,435
